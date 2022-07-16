@@ -113,7 +113,7 @@ header {
   border: 2px solid black;
 }
 
-.saved-recipes-view {}
+/* .saved-recipes-view {} */
 
 .search-image {
   background-color: #f7f5f6;
@@ -145,7 +145,7 @@ header {
 
 .recipe-pic-box {
   width: 20vw;
-  height: 50vh;
+  height: 45vh;
   border: 2px solid #060911;
   border-radius: 20px;
   margin-left: 2vw;
@@ -160,6 +160,10 @@ header {
 
 .last-box {
   margin-right: 5vw;
+}
+
+label {
+  color: #060911;
 }
 
 .footer {
