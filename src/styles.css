@@ -46,6 +46,9 @@ header {
   height: 35vh;
 }
 
+.nav-bar {
+  margin-bottom: 45px;
+}
 .main-section-title {
   color: #060911;
 }
@@ -143,6 +146,10 @@ header {
 }
 
 .recipe-pic-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 20vw;
   height: 50vh;
   border: 2px solid #060911;
@@ -176,6 +183,12 @@ header {
   color: #F9F6EE;
 }
 
+.recipe-label {
+  height: 100px;
+  width: 100px;
+  color: black;
+}
+
 button {
   margin-top: 5px;
   background-color:#427861;
@@ -184,6 +197,10 @@ button {
   padding:0.5em 3em;
   font-weight:400;
   text-transform:uppercase;
+}
+.recipe-image {
+  height: 100px;
+  width: 200px;
 }
 .hidden {
   display: none;
