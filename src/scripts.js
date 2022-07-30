@@ -18,12 +18,14 @@ const searchButton = document.getElementById('searchButton')
 const searchButton2 = document.getElementById('searchButton2');
 const saveRecipeButton = document.getElementById('saveRecipeButton');
 const deleteRecipeButton = document.getElementById('deleteRecipeButton');
+const cookRecipeButton = document.getElementById('cookRecipeButton')
 const savedConfirmation = document.querySelector('.big-box-saved-confirmation');
 const buttonInstructions = document.querySelector('.big-box-button-instructions');
 const searchInput = document.querySelector('.search-input');
 const searchInput2 = document.querySelector('.search-input2');
 const homeViewContainer = document.querySelector('.home-view-container');
 const recipeViewContainer = document.querySelector('.recipe-view-container');
+const cookRecipeMessage = document.querySelector('.cook-recipe-message');
 const savedRecipesContainer = document.querySelector('.saved-recipes-view');
 const smallPantryWindow = document.querySelector('.small-pantry-window')
 const recipeName = document.querySelector('.recipe-name');
@@ -87,6 +89,7 @@ savedRecipesContainer.addEventListener('click', deleteRecipe);
 savedRecipesContainer.addEventListener('click', populateChosenRecipe);
 savedRecipesContainer.addEventListener('click', fireIngredientEvaluation);
 addIngredientsButton.addEventListener('click', postIngredient);
+cookRecipeButton.addEventListener('click', cookRecipe);
 
 // ###########  On-Load Functions  ###########
 
@@ -204,6 +207,7 @@ function populateChosenRecipe(event) {
   event.preventDefault();
   const targetID = event.target.id;
   const parsedID = parseInt(targetID);
+  let canCookResult;
   const savedRecipeIDs = user.recipesToCook.map(recipe => parseInt(recipe.id));
     if (savedRecipeIDs.includes(parsedID)) {
       hide([saveRecipeButton, savedConfirmation])
@@ -219,8 +223,14 @@ function populateChosenRecipe(event) {
     if (recipe.id == targetID) {
       displayChosenRecipeView();
       assignChosenRecipeProperties(recipe);
+      canCookResult = pantry.returnIfRecipeIsCookable(recipe)
     }
   })
+  if (canCookResult === `Yes! You can cook this recipe`){
+    show([cookRecipeButton, cookRecipeMessage])
+  } else {
+    hide([cookRecipeButton, cookRecipeMessage])
+  }
 }
 
 function assignChosenRecipeProperties(recipe) {
@@ -550,6 +560,33 @@ function postIngredient() {
   .catch(error => console.log(error))
 }
 
+function cookRecipe() {
+  let cookedRecipe;
+  
+  recipeData.forEach(recipe => {
+    if(recipe.name === recipeName.innerText) {
+      cookedRecipe = recipe;
+    }
+  })
+  cookedRecipe.ingredients.forEach(ingredient => {
+    console.log({ userID: user.id, ingredientID: parseInt(ingredient.id), ingredientModification: (parseInt(ingredient.quantity.amount * -1))})
+    fetch('http://localhost:3001/api/v1/users', {
+      method: 'POST',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify({ userID: user.id, ingredientID: parseInt(ingredient.id), ingredientModification: (parseInt(ingredient.quantity.amount * -1))})
+    })
+    .then(response => getFetchData2())
+    .then(response => cookRecipeMessage.innerText = 'Recipe cooked! All required ingredient quantities have been removed from your pantry!')
+    .catch(error => console.log(error))
+  })
+}
+  //go into all recipes and find the corresponding recipe to pull ingredient amounts from
+  //go into ingredients, iterate thru all of them, foreach ingredient we make a post request that adds a negative number
+  //we need to POST for every ingredient
+  //needs to take quantity needed from recipe and take the interpolated value and multiply by -1
+  //ingredient.quantity.amount * -1
+
+
 function getIngredientID(ingredientName) {
   const ingredientID = ingredientsData.reduce((id, ingredient) => {
     if (ingredientName === ingredient.name) {
@@ -574,3 +611,4 @@ function getFetchData2 () {
      pantry = new Pantry(user)
   })
 }
+
