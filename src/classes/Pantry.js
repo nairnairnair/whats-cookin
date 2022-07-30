@@ -34,7 +34,7 @@ class Pantry {
       return arr
     }, [])
 
-      /// break here
+      /// see line 69 for how this connects
 
     const neededIngredients = recipe.ingredients.filter(ingredient => !isCookable.includes(ingredient));
 
@@ -65,13 +65,13 @@ class Pantry {
       return `${name}: ${sumNeededIngredients[index]}`
     })
 
-
+    console.log(isCookable.length, recipe.ingredients.length)
     if (isCookable.length === recipe.ingredients.length) {
       console.log("Yes! You can cook this recipe");
-      return "Yes! You can cook this recipe";
+      return `Yes! You can cook this recipe`;
     } else {
-      console.log(`Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n")}.`)
-      return `Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n")}.`;
+      console.log(`Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n \n")}.`)
+      return `Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n \n")}.`;
     }
   }
 

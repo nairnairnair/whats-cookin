@@ -163,8 +163,8 @@ function populateSavedRecipesView() {
       id='${recipe.id}' src='${recipe.image}' alt='${recipe.name}'>
       <div class='saved-recipe-info-bar'>
         <p class='recipe-label'>${recipe.name}</p>
-        <img class='recipe-check-button' src='./check.svg.png' id='${recipe.name}'>
-        <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.name}'>
+        <img class='recipe-check-button' src='./check.svg.png' id= '${recipe.image}'>
+        <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
       </div>
     </section>`;
   })
@@ -476,7 +476,7 @@ function deleteRecipe(event) {
     event.target.closest('section').remove();
   }
   user.recipesToCook.forEach((recipe, index) => {
-    if (alt === `click this trash can to throw away ${recipe.name}`) {
+    if (alt === `click this trash can to throw away ${recipe.image}`) {
       user.recipesToCook.splice(index, 1)
     }
     if (user.recipesToCook.length === 0) {
@@ -491,7 +491,7 @@ function fireIngredientEvaluation(event) {
   if (event.target.classList.contains('recipe-check-button')) {
     let recipeToCheck = event.target.id
     recipeData.forEach(recipe => {
-      if (recipeToCheck === recipe.name) {
+      if (recipeToCheck === recipe.image) {
         smallPantryWindow.innerHTML = ''
         smallPantryWindow.innerHTML += `<p class="pantry-recipe-check-instructions">Click the green
           checkmark to check if you have enough ingredients in your
