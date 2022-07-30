@@ -44,6 +44,7 @@ const userSearchContainer1 = document.querySelector('.user-search-container');
 const userSearchContainer2 = document.querySelector('.user-search-container2');
 const form = document.querySelector('.form')
 const pantryRecipeCheckInstructions = document.querySelector('.pantry-recipe-check-instruction')
+const postingFormContainer = document.querySelector('.posting-form')
 
 // ###########  Global Variables  ###########
 
@@ -170,7 +171,7 @@ function populateSavedRecipesView() {
       <div class='saved-recipe-info-bar'>
         <p class='recipe-label'>${recipe.name}</p>
         <img class='recipe-check-button' src='./check.svg.png' id= '${recipe.image}'>
-        
+
         <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
 
       </div>
@@ -187,13 +188,7 @@ function firePantryView(){
 function populatePantryView() {
   let pantryInfo = pantry.returnIngredientNamesAndAmounts()
   pantryContainer.innerHTML = ''
-  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>
-  <form class='add-ingredients-form'>
-    <p>Add ingredients to your pantry here! And GET COOKIN!!!</p>
-    <input class='ingredient-name' type='text' placeholder='Ingredient Name' id='ingredientNameInput'/>
-    <input class='ingredient-quantity' type='text' placeholder='Ingredient Quantity' id='ingredientQuantityInput'/>
-    <button class="add-ingredients-button">Add This Ingredient!</button>
-  </form>`
+  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>`
 }
   // ${addIngredientsForm}
   // ${ingredientName}
@@ -212,7 +207,7 @@ function populateChosenRecipe(event) {
       hide([saveRecipeButton, savedConfirmation])
       show([deleteRecipeButton])
       buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page'
-    } 
+    }
     else {
       hide([deleteRecipeButton, savedConfirmation])
       show([saveRecipeButton])
@@ -358,7 +353,8 @@ function displayHomeView(){
         allRecipesContainer,
         filteredContainer,
         userSearchContainer2,
-        smallPantryWindow
+        smallPantryWindow,
+        postingFormContainer
 
   ])
   show([allRecipesButton,
@@ -381,7 +377,8 @@ function displaySavedRecipesView(){
         userSearchContainer1,
         form,
         searchButton,
-        pantryContainer
+        pantryContainer,
+        postingFormContainer
   ])
   show([homeButton,
         allRecipesButton,
@@ -400,7 +397,8 @@ function displayAllRecipesView() {
         filteredContainer,
         userSearchContainer2,
         pantryContainer,
-        smallPantryWindow
+        smallPantryWindow,
+        postingFormContainer
       ])
   show([homeButton,
         savedRecipesButton,
@@ -408,7 +406,7 @@ function displayAllRecipesView() {
         userSearchContainer1,
         form,
         searchButton,
-        pantryButton
+        pantryButton,
       ])
 }
 
@@ -419,7 +417,8 @@ function displayChosenRecipeView() {
         filteredContainer,
         userSearchContainer2,
         pantryContainer,
-        smallPantryWindow
+        smallPantryWindow,
+        postingFormContainer
   ])
   show([homeButton,
       savedRecipesButton,
@@ -439,7 +438,8 @@ function displayFilteredView() {
         recipeViewContainer,
         userSearchContainer2,
         pantryContainer,
-        smallPantryWindow
+        smallPantryWindow,
+        postingFormContainer
   ])
   show([homeButton,
       savedRecipesButton,
@@ -470,6 +470,7 @@ function displayPantryView(){
         userSearchContainer1,
         form,
         searchButton,
+        postingFormContainer,
   ])
 }
 
