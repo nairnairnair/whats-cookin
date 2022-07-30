@@ -187,7 +187,19 @@ function populatePantryView() {
 function populateChosenRecipe(event) {
   const recipeObjs = recipeRepo.convertRecipeObjects();
   event.preventDefault();
-  let targetID = event.target.id
+  const targetID = event.target.id;
+  const parsedID = parseInt(targetID);
+  const savedRecipeIDs = user.recipesToCook.map(recipe => parseInt(recipe.id));
+    if (savedRecipeIDs.includes(parsedID)) {
+      hide([saveRecipeButton, savedConfirmation])
+      show([deleteRecipeButton])
+      buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page'
+    } 
+    else {
+      hide([deleteRecipeButton, savedConfirmation])
+      show([saveRecipeButton])
+      buttonInstructions.innerText = 'Click this button to add this recipe to your saved recipes page'
+    }
   recipeObjs.forEach(recipe => {
     if (recipe.id == targetID) {
       displayChosenRecipeView();
