@@ -52,13 +52,15 @@ let recipeRepo;
 let user;
 let usersData;
 let recipeData;
-let pantry
+let pantry;
+let ingredientsData;
 
 // ###########  Promises  ###########
 function getPromiseData() {
   Promise.all( [fetchData('users'), fetchData('recipes'), fetchData('ingredients')]).then(data => {
-    usersData = data[0].usersData;
-    recipeData = data[1].recipeData;
+    usersData = data[0];
+    recipeData = data[1];
+    ingredientsData = data[2]
     user = new User(usersData[randomIndex(usersData)]);
     recipeRepo = new RecipeRepository(recipeData);
     pantry = new Pantry(user)
@@ -535,6 +537,40 @@ function fireIngredientEvaluation(event) {
   }
 }
 
-function postIngredient(){
-  console.log('hi!!')
+function postIngredient() {
+  const parsedQuantity = parseInt(ingredientQuantity.value)
+  console.log({ userID: user.id, ingredientID: getIngredientID(ingredientName.value), ingredientModification: parsedQuantity})
+  fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    headers: {'Content-type': 'application/json'},
+    body: JSON.stringify({ userID: user.id, ingredientID: getIngredientID(ingredientName.value), ingredientModification: parsedQuantity})
+  })
+  .then(response => getFetchData2())
+  .then(response => populatePantryView())
+  .catch(error => console.log(error))
+}
+
+function getIngredientID(ingredientName) {
+  const ingredientID = ingredientsData.reduce((id, ingredient) => {
+    if (ingredientName === ingredient.name) {
+      id.push(parseInt(ingredient.id))
+    }
+    return id
+  }, [])
+  return ingredientID[0]
+
+}
+
+function getFetchData2 () {
+  fetch('http://localhost:3001/api/v1/users')
+  .then(response => response.json())
+  .then(data => {
+    usersData = data;
+    usersData.forEach(person => {
+        if (user.id === person.id) {
+          user = new User(person)
+        }
+      })
+     pantry = new Pantry(user)
+  })
 }
