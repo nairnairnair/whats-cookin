@@ -34,6 +34,10 @@ const allRecipesContainer = document.querySelector('.all-recipes-view');
 const ingredientCost = document.querySelector('.ingredient-cost');
 const filteredContainer = document.querySelector('.filtered-recipes-view')
 const pantryContainer = document.querySelector('.pantry-view')
+const addIngredientsForm = document.querySelector('.add-ingredients-form')
+const ingredientName = document.querySelector('.ingredient-name')
+const ingredientQuantity = document.querySelector('.ingredient-quantity')
+const addIngredientsButton = document.querySelector('.add-ingredients-button')
 const filterByName = document.getElementById('filterByName');
 const filterByName2 = document.getElementById('filterByName2');
 const userSearchContainer1 = document.querySelector('.user-search-container');
@@ -79,6 +83,7 @@ deleteRecipeButton.addEventListener('click', deleteChosenRecipe);
 savedRecipesContainer.addEventListener('click', deleteRecipe);
 savedRecipesContainer.addEventListener('click', populateChosenRecipe);
 savedRecipesContainer.addEventListener('click', fireIngredientEvaluation);
+addIngredientsButton.addEventListener('click', postIngredient);
 
 // ###########  On-Load Functions  ###########
 
@@ -99,7 +104,8 @@ const pageNames = [
   'Who names their kid',
   'Your goose is cooked,',
   'GET IN MAH BELLY,',
-  'Dirty Steve sends his regards,'
+  'Dirty Steve sends his regards,',
+  'CRACKADOODLE,'
 ]
 
 function randomIndex(array) {
@@ -164,11 +170,13 @@ function populateSavedRecipesView() {
       <div class='saved-recipe-info-bar'>
         <p class='recipe-label'>${recipe.name}</p>
         <img class='recipe-check-button' src='./check.svg.png' id= '${recipe.image}'>
+        
         <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
+
       </div>
     </section>`;
   })
-
+/* <button class="cook-recipe-button"></button> */
 }
 
 function firePantryView(){
@@ -179,8 +187,18 @@ function firePantryView(){
 function populatePantryView() {
   let pantryInfo = pantry.returnIngredientNamesAndAmounts()
   pantryContainer.innerHTML = ''
-  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>`
+  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>
+  <form class='add-ingredients-form'>
+    <p>Add ingredients to your pantry here! And GET COOKIN!!!</p>
+    <input class='ingredient-name' type='text' placeholder='Ingredient Name' id='ingredientNameInput'/>
+    <input class='ingredient-quantity' type='text' placeholder='Ingredient Quantity' id='ingredientQuantityInput'/>
+    <button class="add-ingredients-button">Add This Ingredient!</button>
+  </form>`
 }
+  // ${addIngredientsForm}
+  // ${ingredientName}
+  // ${ingredientQuantity}
+  // ${addIngredientsButton}
 
 // ###########  Chosen Recipe View Functions  ###########
 
@@ -514,4 +532,8 @@ function fireIngredientEvaluation(event) {
       }
     })
   }
+}
+
+function postIngredient(){
+  console.log('hi!!')
 }
