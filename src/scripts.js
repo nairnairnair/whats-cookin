@@ -529,7 +529,7 @@ function fireIngredientEvaluation(event) {
   if (event.target.classList.contains('recipe-check-button')) {
     let recipeToCheck = event.target.id;
     recipeData.forEach(recipe => {
-      if (recipeToCheck === recipe.image) {
+      if (recipeToCheck.substring(12) === recipe.image) {
         smallPantryWindow.innerHTML = '';
         smallPantryWindow.innerHTML += `<p class="pantry-recipe-check-instructions">Click the green
           checkmark to check if you have enough ingredients in your
@@ -598,7 +598,9 @@ function getFetchData2 () {
     usersData = data;
     usersData.forEach(person => {
         if (user.id === person.id) {
+          let savedRecipes = user.recipesToCook;
           user = new User(person);
+          user.recipesToCook = savedRecipes;
         }
       })
      pantry = new Pantry(user);
