@@ -15,34 +15,33 @@
       </section>
       <nav class='nav-bar'>
         <button class='nav-buttons hidden' id='homeButton'>Home</button>
-        <button class='nav-buttons' id='savedRecipesButton'>Saved Recipes</button>
-        <button class='nav-buttons hidden' id='myFavoritesButton'>My Favorites</button>
-        <button class='nav-buttons' id='pantryButton'>My Pantry</button>
-        <button class='nav-buttons' id='allRecipesButton'>All Recipes</button>
+        <button tabindex="1" class='nav-buttons' id='savedRecipesButton'>Saved Recipes</button>
+        <button tabindex="2" class='nav-buttons' id='pantryButton'>My Pantry</button>
+        <button tabindex="3" class='nav-buttons' id='allRecipesButton'>All Recipes</button>
           <form role='search'class='form'>
           <p>Search by:</p>
-          <input type='radio' id='filterByName' name='search' value='Name'>
+          <input tabindex="4" type='radio' id='filterByName' name='search' value='Name'>
           <label for='filterByName'>Name</label><br>
-          <input type='radio' id='filterByTag' name='search' value='Tag'>
+          <input tabindex="5" type='radio' id='filterByTag' name='search' value='Tag'>
           <label for='filterByTag'>Category</label><br>
           </form>
           <section class='user-search-container'>
-            <input class='search-input' type='text' placeholder='Search Recipes' id='homePageSearchBar'/>
+            <input tabindex="6" class='search-input' type='text' placeholder='Search Recipes' id='homePageSearchBar'/>
           </section>
-          <button class='search-button' id='searchButton'>Search</button>
+          <button tabindex="7" class='search-button' id='searchButton'>Search</button>
       </nav>
     </header>
     <section class='main-section'>
       <section class ='home-view-container'>
         <h2 class='main-section-title'>So... what IS cookin?</h2>
         <div class='box-of-recipes center-container'>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
-          <div class='recipe-pic-box'></div>
+          <div tabindex="8" class='recipe-pic-box'></div>
+          <div tabindex="9" class='recipe-pic-box'></div>
+          <div tabindex="10" class='recipe-pic-box'></div>
+          <div tabindex="11" class='recipe-pic-box'></div>
+          <div tabindex="12" class='recipe-pic-box'></div>
+          <div tabindex="13" class='recipe-pic-box'></div>
+          <div tabindex="14" class='recipe-pic-box'></div>
         </div>
         <h2 class='main-section-title'>Click on a Recipe!</h2>
       </section>
@@ -59,7 +58,7 @@
             <button class='save-recipe-button hidden' id='deleteRecipeButton'>Delete Recipe</button>
           <p class='cooking-instructions'></p>
           <p class='cook-recipe-message'>You must add additional ingredients to cook this recipe!</p>
-          <button class='cook-recipe-button hidden' id='cookRecipeButton'>Cook This Recipe</button>
+          <button class='cook-recipe-button hidden' tabindex="11"  id='cookRecipeButton'>Cook This Recipe</button>
         </article>
         <div class='recipe-view-pic-box'></div>
       </section>

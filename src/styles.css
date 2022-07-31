@@ -96,6 +96,10 @@ button:hover {
   flex-direction: row-reverse;
 }
 
+.user-search-container2 {
+  margin-left: 50px;
+}
+
 .search-image, .search-image2 {
   background-color: #f7f5f6;
   height: 60%;
