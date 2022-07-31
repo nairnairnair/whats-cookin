@@ -2,9 +2,6 @@ import { expect } from 'chai';
 import Pantry from '../src/classes/Pantry';
 import User from '../src/classes/User'
 
-
-
-
 describe('Pantry', () => {
 
       let usersData;
@@ -373,28 +370,8 @@ describe('Pantry', () => {
     pantry2 = new Pantry(user2);
     });
 
-    it('should be a function', function() {
+      it('should be a function', function() {
         expect(Pantry).to.be.a('function');
-      })
-
-      it.skip('should be able to tell the user they have enough ingredients for a given recipe', function() {
-      // console.log(user.pantry)
-      // user.addRecipeToCook(recipeData[0]);
-      // console.log(user.recipesToCook[0].ingredients)
-      // expect(user.checkIngredients()).to.equal('You can cook it!')
-      // Check recipe to see which ingeredients are needed
-      // We want to check the users pantry for current ingeredients
-      // If the ingredients that are in the pantry are greater than equal to the
-      // ingredients needed in the recipe, then they can cook the meal - let user know
-        expect;
-      })
-
-      it.skip('should be able to tell the user they do not have enough ingredients for a given recipe', function() {
-        expect;
-      })
-
-      it.skip('should be able to determine the amount of missing ingredients still needed to cook a given recipe', function() {
-        expect;
       })
 
       it('should be able to show a user what ingredients and amounts exist inside their pantry', function() {
@@ -404,48 +381,10 @@ describe('Pantry', () => {
         expect(pantry.returnIngredientNamesAndAmounts()).to.equal(values);
       })
 
-      it.skip('should allow user to check the list of recipes to cook to see if there are enough ingredients', function() {
-        expect;
-      })
-
-      it.skip('should be able to tell the user what ingredients are still needed if there are not enough in the pantry', function() {
-        expect;
-      })
-
       it('should tell the user if they can cook a recipe based on ingredients in the pantry. If not, it tells the user what ingredients are missing', function() {
-        // console.log(pantry.returnIfRecipeIsCookable(recipeData[1]))
         const response = pantry.returnIfRecipeIsCookable(recipeData[0])
         const response2 = pantry.returnIfRecipeIsCookable(recipeData[1])
         expect(response).to.equal("Yes! You can cook this recipe")
         expect(response2).to.equal("Sorry! You don't have enough ingredients to cook Dirty Pete's Original Wing Powder. you need: wheat flour: 1.5.")
       })
-
-      it.skip('should not allow a user to cook a recipe if there are not sufficient ingredients', function() {
-        expect;
-      })
-
-      it.skip('should not allow a user to cook a recipe if there are not sufficient ingredients', function() {
-        expect;
-      })
-
-      it.skip('should remove used ingredients from the pantry after cooking a recipe', function() {
-        expect;
-      })
-
-      it.skip('should allow a user to add more ingredients', function() {
-        expect;
-      })
 })
-
-
-// Methods
-// Determine whether a user’s pantry has enough ingredients to cook a given recipe.
-// Determine the amount of missing ingredients still needed to cook a given recipe, based on what’s in the user’s pantry.
-
-// User Stories
-// As a user, I should be able to view what ingredients exist inside of my pantry.
-// As a user, I should be able to check my list of recipes to cook and see if my pantry has enough ingredients to cook a recipe.
-// As a user, I should be told what ingredients are still needed if I don’t have enough ingredients in my pantry to cook the recipe.
-// As a user, I should not be able to cook a recipe if I don’t have the ingredients required.
-// As a user, when I cook a recipe, those ingredients should be removed from my pantry.
-// As a user, I should be able to add more ingredients to my pantry.
