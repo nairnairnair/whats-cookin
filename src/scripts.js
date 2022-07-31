@@ -147,7 +147,7 @@ function populateAllRecipesView() {
   allRecipesContainer.innerHTML = '';
   recipeRepo.recipeData.forEach((recipe) => {
     allRecipesContainer.innerHTML += `<img class='all-recipes-pic-box'
-    id='${recipe.id}' src='${recipe.image}' alt='${recipe.name}'>
+    id='${recipe.id}' tabindex='8'  src='${recipe.image}' alt='${recipe.name}'>
     <p class='recipe-label'>${recipe.name}</p>`;
   })
 }
@@ -171,11 +171,11 @@ function populateSavedRecipesView() {
     savedRecipesContainer.innerHTML +=
     `<section class='trash-this-one'>
       <img class='saved-recipes-pic-box'
-      id='${recipe.id}' src='${recipe.image}' alt='${recipe.name}'>
+      id='${recipe.id}' tabindex="8" src='${recipe.image}' alt='${recipe.name}'>
       <div class='saved-recipe-info-bar'>
         <p class='recipe-label'>${recipe.name}</p>
-        <img class='recipe-check-button' src='./check.svg.png' id= 'This id is: ${recipe.image}'>
-        <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
+        <img class='recipe-check-button' tabindex="9" src='./check.svg.png' id= '${recipe.image}'>
+        <img class='trash-can' tabindex="10" src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
       </div>
     </section>`;
   })
