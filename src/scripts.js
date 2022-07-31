@@ -120,12 +120,12 @@ function randomIndex(array) {
 
 function getRandomRecipe() {
   const recipeIndex = randomIndex(recipeRepo.recipeData);
-  return recipeRepo.recipeData[recipeIndex]
+  return recipeRepo.recipeData[recipeIndex];
 }
 
 function getRandomPageName() {
   const pageNameIndex = randomIndex(pageNames);
-  return pageNames[pageNameIndex]
+  return pageNames[pageNameIndex];
 }
 
 function welcomeUser() {
@@ -143,9 +143,8 @@ function populateRecipesInHomeView() {
 // ###########  All Recipes View Functions  ###########
 
 function populateAllRecipesView() {
-  displayAllRecipesView()
+  displayAllRecipesView();
   allRecipesContainer.innerHTML = '';
-
   recipeRepo.recipeData.forEach((recipe) => {
     allRecipesContainer.innerHTML += `<img class='all-recipes-pic-box'
     id='${recipe.id}' src='${recipe.image}' alt='${recipe.name}'>
@@ -156,16 +155,16 @@ function populateAllRecipesView() {
 // ###########  Saved Recipes View Functions  ###########
 
 function populateSavedRecipesView() {
-  displaySavedRecipesView()
-  smallPantryWindow.innerHTML = ''
+  displaySavedRecipesView();
+  smallPantryWindow.innerHTML = '';
   if (user.recipesToCook.length > 0) {
     smallPantryWindow.innerHTML += `<p class="pantry-recipe-check-instructions">Click the green
       checkmark to check if you have enough ingredients in your
       pantry to cook a recipe! Click the trashcan to remove the
       recipe from your saved recipes!
-      </p>`
+      </p>`;
     } else {
-      smallPantryWindow.innerHTML +=  `<p class="pantry-recipe-check-instructions">You have no saved recipes at this time. Please go to the all recipes page to save one.</p>`
+      smallPantryWindow.innerHTML +=  `<p class="pantry-recipe-check-instructions">You have no saved recipes at this time. Please go to the all recipes page to save one.</p>`;
     }
   savedRecipesContainer.innerHTML = '';
   user.recipesToCook.forEach((recipe) => {
@@ -176,29 +175,22 @@ function populateSavedRecipesView() {
       <div class='saved-recipe-info-bar'>
         <p class='recipe-label'>${recipe.name}</p>
         <img class='recipe-check-button' src='./check.svg.png' id= '${recipe.image}'>
-
         <img class='trash-can' src='./trash.png' alt='click this trash can to throw away ${recipe.image}'>
-
       </div>
     </section>`;
   })
-/* <button class="cook-recipe-button"></button> */
 }
 
 function firePantryView(){
-  populatePantryView()
-  displayPantryView()
+  populatePantryView();
+  displayPantryView();
 }
 
 function populatePantryView() {
-  let pantryInfo = pantry.returnIngredientNamesAndAmounts()
-  pantryContainer.innerHTML = ''
-  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>`
+  let pantryInfo = pantry.returnIngredientNamesAndAmounts();
+  pantryContainer.innerHTML = '';
+  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>`;
 }
-  // ${addIngredientsForm}
-  // ${ingredientName}
-  // ${ingredientQuantity}
-  // ${addIngredientsButton}
 
 // ###########  Chosen Recipe View Functions  ###########
 
@@ -210,26 +202,30 @@ function populateChosenRecipe(event) {
   let canCookResult;
   const savedRecipeIDs = user.recipesToCook.map(recipe => parseInt(recipe.id));
     if (savedRecipeIDs.includes(parsedID)) {
-      hide([saveRecipeButton, savedConfirmation])
-      show([deleteRecipeButton])
-      buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page'
+      hide([saveRecipeButton, savedConfirmation]);
+      show([deleteRecipeButton]);
+      buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page';
     }
     else {
-      hide([deleteRecipeButton, savedConfirmation])
-      show([saveRecipeButton])
-      buttonInstructions.innerText = 'Click this button to add this recipe to your saved recipes page'
+      hide([deleteRecipeButton, savedConfirmation]);
+      show([saveRecipeButton]);
+      buttonInstructions.innerText = 'Click this button to add this recipe to your saved recipes page';
     }
   recipeObjs.forEach(recipe => {
     if (recipe.id == targetID) {
       displayChosenRecipeView();
       assignChosenRecipeProperties(recipe);
-      canCookResult = pantry.returnIfRecipeIsCookable(recipe)
+      canCookResult = pantry.returnIfRecipeIsCookable(recipe);
     }
   })
+
   if (canCookResult === `Yes! You can cook this recipe`){
-    show([cookRecipeButton, cookRecipeMessage])
+    cookRecipeMessage.innerText = "Click this button to cook the recipe and remove the ingredients from your pantry";
+    show([cookRecipeButton, cookRecipeMessage]);
   } else {
-    hide([cookRecipeButton, cookRecipeMessage])
+    cookRecipeMessage.innerText = "You must add additional ingredients to cook this recipe!";
+    hide([cookRecipeButton]);
+    show([cookRecipeMessage]);
   }
 }
 
@@ -248,7 +244,7 @@ function assignChosenRecipeProperties(recipe) {
 
 function returnRecipeIngredientsAndQuantities(recipe) {
   const ingredientNames = recipe.returnIngredientNames();
-  const quantitiesNeeded = recipe.ingredients.map(ingredient => ingredient.quantity.amount)
+  const quantitiesNeeded = recipe.ingredients.map(ingredient => ingredient.quantity.amount);
   const units = recipe.ingredients.map(ingredient => ingredient.quantity.unit);
   const allInfo = ingredientNames.map((name, index) => {
     return `
@@ -261,7 +257,7 @@ function returnRecipeIngredientsAndQuantities(recipe) {
 
 function filterSaved() {
   if (filterByName2.checked) {
-    showFilteredSavedNames(searchInput2.value)
+    showFilteredSavedNames(searchInput2.value);
   }
   else {
     showFilteredSavedTags(searchInput2.value);
@@ -347,13 +343,13 @@ function showFilteredTags(tag) {
 
 function hide(elements) {
   elements.forEach((element) => {
-    element.classList.add('hidden')
+    element.classList.add('hidden');
   })
 }
 
 function show(elements) {
   elements.forEach((element) => {
-    element.classList.remove('hidden')
+    element.classList.remove('hidden');
   })
   saveRecipeButton.innerText = 'Save Recipe';
 }
@@ -491,24 +487,24 @@ function displayPantryView(){
 
 
 function saveChosenRecipe() {
-  savedConfirmation.innerText = 'RECIPE SAVED!'
-  buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page'
-  show([savedConfirmation, deleteRecipeButton])
-  hide([saveRecipeButton])
+  savedConfirmation.innerText = 'RECIPE SAVED!';
+  buttonInstructions.innerText = 'Click this button to remove this recipe from your saved recipes page';
+  show([savedConfirmation, deleteRecipeButton]);
+  hide([saveRecipeButton]);
   recipeData.forEach((recipe) => {
     if (recipeName.innerText === recipe.name && !user.recipesToCook.includes(recipe)) {
-      user.addRecipeToCook(recipe)}
+      user.addRecipeToCook(recipe)};
   })
 }
 
 function deleteChosenRecipe(){
-  savedConfirmation.innerText = 'RECIPE DELETED!'
-  buttonInstructions.innerText = 'Click this button to add this recipe to your saved recipes page'
-  show([saveRecipeButton])
-  hide([deleteRecipeButton])
+  savedConfirmation.innerText = 'RECIPE DELETED!';
+  buttonInstructions.innerText = 'Click this button to add this recipe to your saved recipes page';
+  show([saveRecipeButton]);
+  hide([deleteRecipeButton]);
   user.recipesToCook.forEach((recipe, index) => {
     if (recipe.name === recipeName.innerText){
-      user.recipesToCook.splice(index, 1)
+      user.recipesToCook.splice(index, 1);
     }
   })
 }
@@ -520,28 +516,27 @@ function deleteRecipe(event) {
   }
   user.recipesToCook.forEach((recipe, index) => {
     if (alt === `click this trash can to throw away ${recipe.image}`) {
-      user.recipesToCook.splice(index, 1)
+      user.recipesToCook.splice(index, 1);
     }
     if (user.recipesToCook.length === 0) {
       smallPantryWindow.innerHTML = '';
-      smallPantryWindow.innerHTML = '<p class="pantry-recipe-check-instructions">You have no saved recipes at this time. Please go to the all recipes page to save one.</p>'
-
+      smallPantryWindow.innerHTML = '<p class="pantry-recipe-check-instructions">You have no saved recipes at this time. Please go to the all recipes page to save one.</p>';
     }
   })
 }
 
 function fireIngredientEvaluation(event) {
   if (event.target.classList.contains('recipe-check-button')) {
-    let recipeToCheck = event.target.id
+    let recipeToCheck = event.target.id;
     recipeData.forEach(recipe => {
       if (recipeToCheck === recipe.image) {
-        smallPantryWindow.innerHTML = ''
+        smallPantryWindow.innerHTML = '';
         smallPantryWindow.innerHTML += `<p class="pantry-recipe-check-instructions">Click the green
           checkmark to check if you have enough ingredients in your
            pantry to cook a recipe! Click the trashcan to remove the
            recipe from your saved recipes!
         </p>
-        <p class="pantry-recipe-check-instructions">\n \n${pantry.returnIfRecipeIsCookable(recipe)}</p>`
+        <p class="pantry-recipe-check-instructions">\n \n${pantry.returnIfRecipeIsCookable(recipe)}</p>`;
       }
     })
   }
@@ -549,7 +544,6 @@ function fireIngredientEvaluation(event) {
 
 function postIngredient() {
   const parsedQuantity = parseInt(ingredientQuantity.value)
-  console.log({ userID: user.id, ingredientID: getIngredientID(ingredientName.value), ingredientModification: parsedQuantity})
   fetch('http://localhost:3001/api/v1/users', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -562,39 +556,38 @@ function postIngredient() {
 
 function cookRecipe() {
   let cookedRecipe;
-  
   recipeData.forEach(recipe => {
     if(recipe.name === recipeName.innerText) {
       cookedRecipe = recipe;
     }
   })
   cookedRecipe.ingredients.forEach(ingredient => {
-    console.log({ userID: user.id, ingredientID: parseInt(ingredient.id), ingredientModification: (parseInt(ingredient.quantity.amount * -1))})
     fetch('http://localhost:3001/api/v1/users', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({ userID: user.id, ingredientID: parseInt(ingredient.id), ingredientModification: (parseInt(ingredient.quantity.amount * -1))})
     })
+    .then(response => response.json())
     .then(response => getFetchData2())
-    .then(response => cookRecipeMessage.innerText = 'Recipe cooked! All required ingredient quantities have been removed from your pantry!')
+    .then(response => {
+      if (response.ok) {
+      cookRecipeMessage.innerText = 'Recipe cooked! All required ingredient quantities have been removed from your pantry!';
+    } else {
+      cookRecipeMessage.innerText = pantry.returnIfRecipeIsCookable(cookedRecipe);
+      return;
+    }})
     .catch(error => console.log(error))
   })
 }
-  //go into all recipes and find the corresponding recipe to pull ingredient amounts from
-  //go into ingredients, iterate thru all of them, foreach ingredient we make a post request that adds a negative number
-  //we need to POST for every ingredient
-  //needs to take quantity needed from recipe and take the interpolated value and multiply by -1
-  //ingredient.quantity.amount * -1
-
 
 function getIngredientID(ingredientName) {
   const ingredientID = ingredientsData.reduce((id, ingredient) => {
     if (ingredientName === ingredient.name) {
-      id.push(parseInt(ingredient.id))
+      id.push(parseInt(ingredient.id));
     }
-    return id
+    return id;
   }, [])
-  return ingredientID[0]
+  return ingredientID[0];
 
 }
 
@@ -605,10 +598,9 @@ function getFetchData2 () {
     usersData = data;
     usersData.forEach(person => {
         if (user.id === person.id) {
-          user = new User(person)
+          user = new User(person);
         }
       })
-     pantry = new Pantry(user)
+     pantry = new Pantry(user);
   })
 }
-

@@ -1,7 +1,7 @@
 
 /* Global */
 * {
-  font-family:'Times New Roman', Times, serif
+  font-family:'Times New Roman', Times, serif;
 }
 
 body {
@@ -267,6 +267,11 @@ button:hover {
   color: black;
   height: 92%;
   overflow-y: scroll;
+}
+
+.cook-recipe-message {
+  color: #990000;
+  font-weight: bold;
 }
 
 .recipe-label, .pantry-recipe-check-instructions {
