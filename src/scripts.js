@@ -546,6 +546,7 @@ function postIngredient() {
     ingredientsMessage.innerText = 'Please enter an Ingredient Quantity.';
     return;
   } else {
+    ingredientsMessage.innerText = 'You have added your ingredient successfully!'
     const parsedQuantity = parseInt(ingredientQuantity.value)
   fetch('http://localhost:3001/api/v1/users', {
     method: 'POST',
