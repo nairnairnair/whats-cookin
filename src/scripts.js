@@ -37,6 +37,7 @@ const ingredientCost = document.querySelector('.ingredient-cost');
 const filteredContainer = document.querySelector('.filtered-recipes-view')
 const pantryContainer = document.querySelector('.pantry-view')
 const addIngredientsForm = document.querySelector('.add-ingredients-form')
+const ingredientsMessage = document.querySelector('.ingredients-message')
 const ingredientName = document.querySelector('.ingredient-name')
 const ingredientQuantity = document.querySelector('.ingredient-quantity')
 const addIngredientsButton = document.querySelector('.add-ingredients-button')
@@ -241,7 +242,6 @@ function assignChosenRecipeProperties(recipe) {
   <img class='recipe-view-pic' src='https://us.123rf.com/450wm/deagreez/deagreez1910/deagreez191008478/133027063-portrait-of-sad-upset-girl-hold-hand-feel-hungry-have-stomach-ache-want-eat-more-unhealthy-dieting-c.jpg?ver=6' alt='Hungry woman holding an empty plate, feeling hungry'>`
 }
 
-
 function returnRecipeIngredientsAndQuantities(recipe) {
   const ingredientNames = recipe.returnIngredientNames();
   const quantitiesNeeded = recipe.ingredients.map(ingredient => ingredient.quantity.amount);
@@ -264,7 +264,6 @@ function filterSaved() {
   }
   displayFilteredView();
 }
-
 
 function showFilteredSavedTags(tags) {
   const tagResults = user.listRecipeToCookByTag(tags);
@@ -322,7 +321,6 @@ function showFilteredNames(name) {
    })
   }
  }
-
 
 function showFilteredTags(tag) {
  const tagResults = recipeRepo.listRecipeTags(tag);
@@ -482,9 +480,7 @@ function displayPantryView(){
   ])
 }
 
-
 // ###########  Save/Remove Recipe Functions  ###########
-
 
 function saveChosenRecipe() {
   savedConfirmation.innerText = 'RECIPE SAVED!';
@@ -543,7 +539,14 @@ function fireIngredientEvaluation(event) {
 }
 
 function postIngredient() {
-  const parsedQuantity = parseInt(ingredientQuantity.value)
+  if (ingredientName.value === '') {
+    ingredientsMessage.innerText = 'Please enter an Ingredient Name.';
+    return;
+  } else if (ingredientQuantity.value === '') {
+    ingredientsMessage.innerText = 'Please enter an Ingredient Quantity.';
+    return;
+  } else {
+    const parsedQuantity = parseInt(ingredientQuantity.value)
   fetch('http://localhost:3001/api/v1/users', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -552,6 +555,7 @@ function postIngredient() {
   .then(response => getFetchData2())
   .then(response => populatePantryView())
   .catch(error => console.log(error))
+  }
 }
 
 function cookRecipe() {
