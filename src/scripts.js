@@ -36,7 +36,6 @@ const allRecipesContainer = document.querySelector('.all-recipes-view');
 const ingredientCost = document.querySelector('.ingredient-cost');
 const filteredContainer = document.querySelector('.filtered-recipes-view')
 const pantryContainer = document.querySelector('.pantry-view')
-// const addIngredientsForm = document.querySelector('.add-ingredients-form')
 const ingredientsMessage = document.querySelector('.ingredients-message')
 const ingredientName = document.querySelector('.ingredient-name')
 const ingredientQuantity = document.querySelector('.ingredient-quantity')
@@ -46,7 +45,6 @@ const filterByName2 = document.getElementById('filterByName2');
 const userSearchContainer1 = document.querySelector('.user-search-container');
 const userSearchContainer2 = document.querySelector('.user-search-container2');
 const form = document.querySelector('.form')
-// const pantryRecipeCheckInstructions = document.querySelector('.pantry-recipe-check-instruction')
 const postingFormContainer = document.querySelector('.posting-form')
 
 // ###########  Global Variables  ###########
@@ -190,7 +188,7 @@ function firePantryView(){
 function populatePantryView() {
   let pantryInfo = pantry.returnIngredientNamesAndAmounts();
   pantryContainer.innerHTML = '';
-  pantryContainer.innerHTML = `<h2 class='pantryText'>${pantryInfo}</h2>`;
+  pantryContainer.innerHTML = `<h2 class='pantry-text'>${pantryInfo}</h2>`;
 }
 
 // ###########  Chosen Recipe View Functions  ###########
@@ -315,7 +313,7 @@ function showFilteredNames(name) {
   } else {
   filteredContainer.innerHTML = '';
   nameResults.forEach((recipe) => {
-   filteredContainer.innerHTML += `<img class='recipe-pic-box'
+   filteredContainer.innerHTML += `<img class='recipe-image'
      id='${recipe.id}' src='${recipe.image}'>
      <p class='recipe-label'>${recipe.name}</p>`;
    })
@@ -330,7 +328,7 @@ function showFilteredTags(tag) {
  } else {
  filteredContainer.innerHTML = '';
  tagResults.forEach((recipe) => {
-  filteredContainer.innerHTML += `<img class='recipe-pic-box'
+  filteredContainer.innerHTML += `<img class='recipe-image'
     id='${recipe.id}' src='${recipe.image}'>
     <p class='recipe-label'>${recipe.name}</p>`;
     })

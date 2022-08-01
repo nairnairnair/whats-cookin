@@ -20,7 +20,7 @@ class Pantry {
     })
     return acc;
     }, [])
-  return test.join();
+  return test.join('');
   }
 
   returnIfRecipeIsCookable(recipe) {
@@ -64,7 +64,7 @@ class Pantry {
     if (isCookable.length === recipe.ingredients.length) {
       return `Yes! You can cook this recipe`;
     } else {
-      return `Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n")}.`;
+      return `Sorry! You don't have enough ingredients to cook ${recipe.name}. You need: \n ${formattedNameAndSum.join("\n")}.`;
     }
   }
 

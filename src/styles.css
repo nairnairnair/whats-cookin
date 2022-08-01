@@ -196,10 +196,10 @@ button:hover {
   margin-right: 1vw;
 }
 
-.filtered-recipes-view:hover {
+/* .filtered-recipes-view:hover {
   cursor: pointer;
   box-shadow: 1px 2px #ea5442
-}
+} */
 
 .recipe-view-small-box, 
 .recipe-view-pic-box {
@@ -233,6 +233,7 @@ button:hover {
 .ingredients-message {
   color: green;
   font-weight: bold;
+  font-size: medium;
 }
 
 .save-recipe-button-container {
@@ -248,6 +249,7 @@ button:hover {
 }
 
 .recipe-name {
+  font-size: medium;
   width: 100%;
   height: 20%;
   color: black;
@@ -259,12 +261,14 @@ button:hover {
 }
 
 .ingredient-cost {
+  font-size: medium;
   width: 100%;
   height: 20%;
   color: black
 }
 
 .ingredient-details {
+  font-size: medium;
   width: 100%;
   height: 115%;
   color: black;
@@ -272,6 +276,7 @@ button:hover {
 }
 
 .cooking-instructions {
+  font-size: medium;
   color: black;
   height: 92%;
   overflow-y: scroll;
@@ -279,7 +284,9 @@ button:hover {
 
 .cook-recipe-message {
   color: #990000;
+  font-size: medium;
   font-weight: bold;
+  overflow-y: scroll;
 }
 
 .recipe-label, 
@@ -315,8 +322,10 @@ button:hover {
   overflow-y: scroll;
 }
 
-.pantryText {
+.pantry-text {
   color: black;
+  content:"/a";
+  white-space:pre;
 }
 
 .saved-recipes-view {
@@ -326,7 +335,6 @@ button:hover {
   justify-content: space-between;
   height: 475px;
   width: 1000px;
-  margin-right: 25%;
   overflow-x: hidden;
   overflow-y: scroll;
 }
