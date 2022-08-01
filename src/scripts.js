@@ -552,9 +552,18 @@ function postIngredient() {
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify({ userID: user.id, ingredientID: getIngredientID(ingredientName.value), ingredientModification: parsedQuantity})
   })
+  .then(response =>{
+    if (!response.ok) {
+      throw new Error ('Unable to add an ingredient you do not currently have. Please try again.')
+    } else {
+      return response.json();
+    }
+  })
   .then(response => getFetchData2())
   .then(response => populatePantryView())
-  .catch(error => console.log(error))
+  .catch(error => {
+    ingredientsMessage.innerText = error.message;
+    }) 
   }
 }
 
