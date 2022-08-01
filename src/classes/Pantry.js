@@ -64,7 +64,6 @@ class Pantry {
     if (isCookable.length === recipe.ingredients.length) {
       return `Yes! You can cook this recipe`;
     } else {
-      console.log(formattedNameAndSum.join("\n"))
       return `Sorry! You don't have enough ingredients to cook ${recipe.name}. you need: ${formattedNameAndSum.join("\n")}.`;
     }
   }
