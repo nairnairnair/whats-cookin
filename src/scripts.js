@@ -36,7 +36,7 @@ const allRecipesContainer = document.querySelector('.all-recipes-view');
 const ingredientCost = document.querySelector('.ingredient-cost');
 const filteredContainer = document.querySelector('.filtered-recipes-view')
 const pantryContainer = document.querySelector('.pantry-view')
-const addIngredientsForm = document.querySelector('.add-ingredients-form')
+// const addIngredientsForm = document.querySelector('.add-ingredients-form')
 const ingredientsMessage = document.querySelector('.ingredients-message')
 const ingredientName = document.querySelector('.ingredient-name')
 const ingredientQuantity = document.querySelector('.ingredient-quantity')
@@ -46,7 +46,7 @@ const filterByName2 = document.getElementById('filterByName2');
 const userSearchContainer1 = document.querySelector('.user-search-container');
 const userSearchContainer2 = document.querySelector('.user-search-container2');
 const form = document.querySelector('.form')
-const pantryRecipeCheckInstructions = document.querySelector('.pantry-recipe-check-instruction')
+// const pantryRecipeCheckInstructions = document.querySelector('.pantry-recipe-check-instruction')
 const postingFormContainer = document.querySelector('.posting-form')
 
 // ###########  Global Variables  ###########
@@ -217,6 +217,7 @@ function populateChosenRecipe(event) {
       displayChosenRecipeView();
       assignChosenRecipeProperties(recipe);
       canCookResult = pantry.returnIfRecipeIsCookable(recipe);
+      cookRecipeMessage.innerText = `${canCookResult}`
     }
   })
 
@@ -224,7 +225,6 @@ function populateChosenRecipe(event) {
     cookRecipeMessage.innerText = "Click this button to cook the recipe and remove the ingredients from your pantry";
     show([cookRecipeButton, cookRecipeMessage]);
   } else {
-    cookRecipeMessage.innerText = "You must add additional ingredients to cook this recipe!";
     hide([cookRecipeButton]);
     show([cookRecipeMessage]);
   }
@@ -525,7 +525,7 @@ function fireIngredientEvaluation(event) {
   if (event.target.classList.contains('recipe-check-button')) {
     let recipeToCheck = event.target.id;
     recipeData.forEach(recipe => {
-      if (recipeToCheck.substring(12) === recipe.image) {
+      if (recipeToCheck === recipe.image) {
         smallPantryWindow.innerHTML = '';
         smallPantryWindow.innerHTML += `<p class="pantry-recipe-check-instructions">Click the green
           checkmark to check if you have enough ingredients in your
@@ -564,11 +564,12 @@ function postIngredient() {
   .then(response => populatePantryView())
   .catch(error => {
     ingredientsMessage.innerText = error.message;
-    }) 
+    })
   }
 }
 
 function cookRecipe() {
+  hide([cookRecipeButton]);
   let cookedRecipe;
   recipeData.forEach(recipe => {
     if(recipe.name === recipeName.innerText) {
@@ -583,13 +584,7 @@ function cookRecipe() {
     })
     .then(response => response.json())
     .then(response => getFetchData2())
-    .then(response => {
-      if (response.ok) {
-      cookRecipeMessage.innerText = 'Recipe cooked! All required ingredient quantities have been removed from your pantry!';
-    } else {
-      cookRecipeMessage.innerText = pantry.returnIfRecipeIsCookable(cookedRecipe);
-      return;
-    }})
+    .then(response => cookRecipeMessage.innerText = 'Recipe cooked! All required ingredient quantities have been removed from your pantry!')
     .catch(error => console.log(error))
   })
 }
